@@ -1,0 +1,22 @@
+---
+- hosts: webservers
+
+  tasks:
+    - name: Deleting the index.html
+      ansible.builtin.file:
+        path: /var/www/html/newindex.html
+        state: absent
+
+    - name: Stopping Apache
+      ansible.builtin.service:
+        name: httpd
+        state: stopped
+        enabled: no
+
+    - name: Uninstalling Apache
+      ansible.builtin.yum:
+        name: httpd
+        state: removed
+
+...
+
